@@ -9,8 +9,8 @@
 			<form method="POST" action="{{ url_for('login') }}" novalidate>
 			{{ form.csrf_token }}
 			<p>
-				{{ form.username.label }}:<br>{{ form.username(size=15) }}
-				{% for err in form.username.errors %}
+				{{ form.email.label }}:<br>{{ form.email(size=15) }}
+				{% for err in form.email.errors %}
 				<span style="color:red">{{ err }}</span>
 				{% endfor %}
 			</p>
