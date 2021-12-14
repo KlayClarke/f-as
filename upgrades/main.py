@@ -2,7 +2,7 @@ import csv
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
 from wtforms.validators import DataRequired
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from wtforms import StringField, SubmitField, SelectField, URLField
 
 
@@ -16,7 +16,8 @@ class CafeForm(FlaskForm):
     location = URLField('Cafe location on Google Maps (URL)', validators=[DataRequired()])
     open = StringField('Opening time e.g, 5AM', validators=[DataRequired()])
     close = StringField('Closing time e.g, 530PM', validators=[DataRequired()])
-    coffee = SelectField('Coffee Rating', validators=[DataRequired()], choices=['☕', '☕☕', '☕☕☕', '☕☕☕☕', '☕☕☕☕☕'])
+    coffee = SelectField('Coffee Rating', validators=[DataRequired()],
+                         choices=['☕', '☕☕', '☕☕☕', '☕☕☕☕', '☕☕☕☕☕'])
     wifi = SelectField('Wifi Strength Rating', validators=[DataRequired()],
                        choices=['✘', '💪', '💪💪', '💪💪💪', '💪💪💪💪', '💪💪💪💪💪'])
     power = SelectField('Power Outlet Strength Rating', validators=[DataRequired()],
@@ -40,7 +41,7 @@ def add_cafe():
         with open('cafe-data.csv', mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(location_addition)
-        return render_template('cafes.html')
+        return redirect('cafes')
     return render_template('add.html', form=form)
 
 
