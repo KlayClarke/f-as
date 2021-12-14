@@ -1,9 +1,8 @@
 import os
 from flask_wtf import FlaskForm
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from wtforms.validators import DataRequired, Email, Length
 from wtforms import StringField, PasswordField, SubmitField
-
 
 app = Flask(__name__)
 
@@ -25,15 +24,24 @@ def home():
 def login():
     form = LoginForm()
     form.validate_on_submit()
-    if form.validate_on_submit():
+    if request.method == 'GET':
+        return render_template('login.html', form=form)
+    if request.method == 'POST' and form.validate_on_submit():
         print(form.email.data)
         print(form.password.data)
-    return render_template('login.html', form=form)
+        return render_template('success.html')
+    elif request.method == 'POST' and not form.validate_on_submit():
+        return render_template('denied.html')
 
 
 @app.route('/success')
 def success():
     return render_template('success.html')
+
+
+@app.route('/denied')
+def denied():
+    return render_template('denied.html')
 
 
 if __name__ == '__main__':
