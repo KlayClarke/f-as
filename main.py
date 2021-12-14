@@ -30,7 +30,7 @@ def login():
         print(form.email.data)
         print(form.password.data)
         return render_template('success.html')
-    elif request.method == 'POST' and not form.validate_on_submit():
+    else:
         return render_template('denied.html')
 
 
