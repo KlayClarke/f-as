@@ -25,6 +25,9 @@ def home():
 def login():
     form = LoginForm()
     form.validate_on_submit()
+    if form.validate_on_submit():
+        print(form.email.data)
+        print(form.password.data)
     return render_template('login.html', form=form)
 
 
