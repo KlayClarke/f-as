@@ -1,7 +1,7 @@
 import os
 from flask_wtf import FlaskForm
 from flask import Flask, render_template
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email, Length
 from wtforms import StringField, PasswordField, SubmitField
 
 
@@ -11,8 +11,8 @@ app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
 
 class LoginForm(FlaskForm):
-    username = StringField(label='username', validators=[DataRequired()])
-    password = PasswordField(label='password', validators=[DataRequired()])
+    email = StringField(label='email', validators=[DataRequired(), Email()])
+    password = PasswordField(label='password', validators=[DataRequired(), Length(min=8)])
     login_button = SubmitField('Login')
 
 
