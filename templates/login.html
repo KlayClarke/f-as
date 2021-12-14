@@ -1,27 +1,23 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Login</title>
-	</head>
-	<body>
-        <div class="container">
-			<h1>Login</h1>
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+	<div class="container">
+		<h1>Login</h1>
 			<form method="POST" action="{{ url_for('login') }}" novalidate>
 			{{ form.csrf_token }}
 			<p>
-				{{ form.email.label }}:<br>{{ form.email(size=15) }}
-				{% for err in form.email.errors %}
-				<span style="color:red">{{ err }}</span>
-				{% endfor %}
+			{{ form.email.label }}:<br>{{ form.email(size=15) }}
+			{% for err in form.email.errors %}
+			<span style="color:red">{{ err }}</span>
+			{% endfor %}
 			</p>
 			<p>
-				{{ form.password.label }}:<br>{{ form.password(size=15) }}
-				{% for err in form.password.errors %}
-				<span style="color:red">{{ err }}</span>
-				{% endfor %}
+			{{ form.password.label }}:<br>{{ form.password(size=15) }}
+			{% for err in form.password.errors %}
+			<span style="color:red">{{ err }}</span>
+			{% endfor %}
 			</p>
 			{{ form.login_button }}
-			</form>
-        </div>
-	</body>
-</html>
+		</form>
+	</div>
+{% endblock %}
