@@ -27,14 +27,11 @@ def home():
 def login():
     form = LoginForm()
     form.validate_on_submit()
-    if request.method == 'GET':
-        return render_template('login.html', form=form)
     if request.method == 'POST' and form.validate_on_submit():
         print(form.email.data)
         print(form.password.data)
         return render_template('success.html')
-    else:
-        return render_template('denied.html')
+    return render_template('login.html', form=form)
 
 
 @app.route('/success')
