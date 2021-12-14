@@ -6,10 +6,22 @@
 	<body>
         <div class="container">
 			<h1>Login</h1>
+			<form method="POST" action="{{ url_for('login') }}">
 			{{ form.csrf_token }}
-			{{ form.username.label }} {{ form.username(size=15) }}
-			{{ form.password.label }} {{ form.password(size=15) }}
+			<p>
+				{{ form.username.label }}:<br>{{ form.username(size=15) }}
+				{% for err in form.username.errors %}
+				<span style="color:red">{{ err }}</span>
+				{% endfor %}
+			</p>
+			<p>
+				{{ form.password.label }}:<br>{{ form.password(size=15) }}
+				{% for err in form.password.errors %}
+				<span style="color:red">{{ err }}</span>
+				{% endfor %}
+			</p>
 			{{ form.login_button }}
+			</form>
         </div>
 	</body>
 </html>
