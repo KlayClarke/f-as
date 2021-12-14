@@ -6,8 +6,10 @@
 	<body>
         <div class="container">
 			<h1>Login</h1>
+			{{ form.csrf_token }}
 			{{ form.username.label }} {{ form.username(size=15) }}
 			{{ form.password.label }} {{ form.password(size=15) }}
+			{{ form.login_button }}
         </div>
 	</body>
 </html>
